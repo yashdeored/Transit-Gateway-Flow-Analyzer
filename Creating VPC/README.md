@@ -46,3 +46,20 @@ For the subnet configuration add the same CIDR for the subnet for all the 3 vpcs
 
 ![image](https://github.com/yashdeored/Transit-Gateway-Flow-Analyzer/assets/152061059/341e525c-98fd-4c2b-8e53-fa9f6cd0c1a3)
 
+it should look like this:
+
+<img width="1440" alt="Screenshot 2024-06-30 at 7 09 21 PM" src="https://github.com/yashdeored/Transit-Gateway-Flow-Analyzer/assets/152061059/664f20bb-a701-44a8-92f9-3db2796415bd">
+
+Now update the route table for each of the 3 vpc:
+
+<img width="1440" alt="Screenshot 2024-06-30 at 7 10 04 PM" src="https://github.com/yashdeored/Transit-Gateway-Flow-Analyzer/assets/152061059/51dfe0c6-da61-48f7-b612-8f36d24abe7b">
+
+It should be as follows:
+
+<img width="1440" alt="Screenshot 2024-06-30 at 7 11 02 PM" src="https://github.com/yashdeored/Tran
+sit-Gateway-Flow-Analyzer/assets/152061059/39161d2c-1476-4528-8f66-2a46afb5bb5f">
+
+Now create a transit gateway:
+
+<img width="1440" alt="Screenshot 2024-06-30 at 7 12 20 PM" src="https://github.com/yashdeored/Transit-Gateway-Flow-Analyzer/assets/152061059/99271485-6c41-4b10-828d-2e73b3068705">
+
