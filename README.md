@@ -3,27 +3,93 @@ This is a project where we enable flow logs for an existing Transit Gateway then
 
 In this project:
 
-1. Create three vpcs in the same region with configurations:
+<h1>1. Create three vpcs in the same region with configurations:</h1>
+<h3>
+   
+```
    vpc1: 12.0.0.0/16
    vpc2: 13.0.0.0/16
    vpc3: 14.0.0.0/16
+```
+</h3>
 
-2. Subnet association:
+![image](https://github.com/yashdeored/Transit-Gateway-Flow-Analyzer/assets/152061059/a363b9ea-6cab-4bf1-abfa-0318c76ee0ed)
+
+![image](https://github.com/yashdeored/Transit-Gateway-Flow-Analyzer/assets/152061059/5f05c525-fa56-45fb-97a0-c541d3fa162c)
+
+Similarly create two more vpcs
+
+Finally it should look like this:
+
+![image](https://github.com/yashdeored/Transit-Gateway-Flow-Analyzer/assets/152061059/b1ee6c55-5383-4420-a333-f833d0fc5aac)
+
+<h1> 2. Subnet association: </h1>
+
+<h3>
+   
+```
    subnet-1: CIDR: 12.0.0.0/24
    subnet-2: CIDR: 13.0.0.0/24
    subnet-3: CIDR: 14.0.0.0/24
+```
+</h3>
 
-3. Create three Internet Gateways and attach it with each vpc individually.
+![image](https://github.com/yashdeored/Transit-Gateway-Flow-Analyzer/assets/152061059/21cf760f-4083-4c20-99a6-5b09e63d9c20)
+
+Similary create the remaining 2 subnets
+
+Finally it should look like this:
+
+![image](https://github.com/yashdeored/Transit-Gateway-Flow-Analyzer/assets/152061059/2e7128d2-53e5-49e1-98a5-9e4a8ddd690b)
+
+<h1> 3. Create three Internet Gateways and attach it with each vpc individually. </h1>
+
+<h3>
+
+   ```
    igw-1 --> for vpc1
    igw-2 --> for vpc2
    igw-3 --> for vpc3
-   
-5. Create a transit Gateway with the following configurations:
+   ```
+
+</h3>
+
+![image](https://github.com/yashdeored/Transit-Gateway-Flow-Analyzer/assets/152061059/4a050d98-25fc-4ca8-822c-77ea8f5d81bd)
+
+![image](https://github.com/yashdeored/Transit-Gateway-Flow-Analyzer/assets/152061059/f1a7574e-7fb8-418b-bace-c0cf4ec8d12b)
+
+Attach the igw-1 to vpc1
+
+![image](https://github.com/yashdeored/Transit-Gateway-Flow-Analyzer/assets/152061059/4e84aec5-4c7a-4107-a926-d47b7ec1cd0d)
+
+![image](https://github.com/yashdeored/Transit-Gateway-Flow-Analyzer/assets/152061059/f5a5b0e8-e3b3-452c-8783-91e9febf98dd)
+
+Similarly create igw-2 and attach it to vpc2 and create igw-3 and attach it to vpc3.
+
+It should look like this:
+
+![image](https://github.com/yashdeored/Transit-Gateway-Flow-Analyzer/assets/152061059/ea345ba3-d07d-445a-98ad-440edbe01d83)
+
+<h1> 4. Create a transit Gateway with the following configurations: </h1>
+
+<h3>
+
+   ```
    name-tag: tgw for vpc-1 vpc-2 vpc-3
    description: transit gateway for vpc 1, vpc 2 and vpc 3
    leave the ASN and CIDR and create a transit gateway
+   ```
+
+</h3>
+
+![image](https://github.com/yashdeored/Transit-Gateway-Flow-Analyzer/assets/152061059/5300231c-b96e-48f6-94d5-cf4734d42670)
    
-6. Create three transit gateway attachment for each vpc such as:
+<h1> 6. Create three transit gateway attachment for each vpc such as: </h1>
+
+<h3>
+
+   ```
+
    Name tag - optional: tgw-1
    Transit gateway ID: attach the 'tgw for vpc-1 vpc-2 vpc-3' gateway
    attachment type: VPC
@@ -39,8 +105,25 @@ In this project:
    attachment type: VPC
    vpc1ttachment: vpc1: 14.0.0.0/16
 
+```
+
+</h3>
+
+Attach the vpc1 id and transit gateway for tgw-1:
+
+![image](https://github.com/yashdeored/Transit-Gateway-Flow-Analyzer/assets/152061059/eee0dc0a-4bde-404f-bce2-79b2aa0c27a9)
+
+Do the same for the rest for the rest of the transit gateway attachment
+
+The final result should be this:
+
+![image](https://github.com/yashdeored/Transit-Gateway-Flow-Analyzer/assets/152061059/27d8f44a-ff27-4144-993c-c839374e8472)
+
+<h1> 7. Create a three route tables for three vpcs and update the following for: </h1>
+
+<h3>
    
-7. Create a three route tables for three vpcs and update the following for:
+```
    rtb-1(for vpc1):
    0.0.0.0/0 --> Internet Gateway (Attached with vpc1) igw-1
    13.0.0.0/16 --> transit gateway attachment --> tgw-2
@@ -55,8 +138,35 @@ In this project:
    0.0.0.0/0 --> Internet Gateway (Attached with vpc3) igw-3
    13.0.0.0/16 --> transit gateway attachment --> tgw-2
    12.0.0.0/16 --> transit gatewat attachment --> tgw-1
+```
 
-8. Create three ec2 instances with configurations as follows:
+</h3>
+
+<h4> For rtb-1: </h4>
+
+![image](https://github.com/yashdeored/Transit-Gateway-Flow-Analyzer/assets/152061059/07aabba6-77aa-4f4e-912a-2ab821c1ae42)
+
+Edit the routes:
+
+![image](https://github.com/yashdeored/Transit-Gateway-Flow-Analyzer/assets/152061059/8a4d91d5-d1b1-4fb4-b87a-731161d70bc8)
+
+![image](https://github.com/yashdeored/Transit-Gateway-Flow-Analyzer/assets/152061059/0ddbf2e0-b63f-4c55-853d-afd0a61fdb6a)
+
+<h4> For rtb-2: </h4>
+
+![image](https://github.com/yashdeored/Transit-Gateway-Flow-Analyzer/assets/152061059/1212d405-e947-405f-ac37-4eceee05d125)
+
+![image](https://github.com/yashdeored/Transit-Gateway-Flow-Analyzer/assets/152061059/c03e3dc3-da64-41a6-a24a-d8b98a720a87)
+
+<h4> For rtb-3: </h4>
+
+![image](https://github.com/yashdeored/Transit-Gateway-Flow-Analyzer/assets/152061059/d1ceb43e-be6f-490a-8556-ae7277473b31)
+
+<h1> 7. Create three ec2 instances with configurations as follows: </h1>
+
+<h3>
+
+   ```
    Name: instance-1
    AMI: Amazon Linux 2023 AMI
    Instance type: t2.micro
@@ -73,6 +183,7 @@ In this project:
    Inbound secrity rule:
    ssh --> anywhere --> 0.0.0.0/0
    http --> anywhere --> 0.0.0.0/0
+```
 
    user data script:
    ```
@@ -134,8 +245,17 @@ In this project:
    echo "<h1>Server Details</h1><p><strong>Hostname:</strong> $(hostname)</p><p><strong>IP Address:</strong> $(hostname -I | cut -d" " -f1)</p>" > /var/www/html/index.html
    sudo systemctl restart apache2
    ```
+</h3>
 
-Connect instance-1 by selecting it and go to SSH client where the code to ssh is given and open the  terminal through cloud9 or you can also open just the  terminal or on your local network by vs code.
+![image](https://github.com/yashdeored/Transit-Gateway-Flow-Analyzer/assets/152061059/8c7ad8ef-9e1a-4667-8ffc-55da6dc6746c)
+
+![image](https://github.com/yashdeored/Transit-Gateway-Flow-Analyzer/assets/152061059/98f095c7-9162-44ad-a297-18417e880a3c)
+
+![image](https://github.com/yashdeored/Transit-Gateway-Flow-Analyzer/assets/152061059/01fb654a-09a3-4c97-85fa-c1bdaacc8521)
+
+![image](https://github.com/yashdeored/Transit-Gateway-Flow-Analyzer/assets/152061059/72950662-bd81-4102-aeea-91cfc2d45a72)
+
+<h3> Connect instance-1 by selecting it and go to SSH client where the code to ssh is given and open the  terminal through cloud9 or you can also open just the  terminal or on your local network by vs code. </h3>
 
 commands to run after running the code from SSH client:
 for vpc1:
@@ -155,6 +275,10 @@ for vpc3:
 curl (private ip of vpc1)
 curl (private ip of vpc3)
 ```
+
+![image](https://github.com/yashdeored/Transit-Gateway-Flow-Analyzer/assets/152061059/c4761a78-b3fc-4ee6-9b41-b263886638db)
+
+![image](https://github.com/yashdeored/Transit-Gateway-Flow-Analyzer/assets/152061059/00e774a1-9a4c-4b4a-888a-e715cfa58723)
 
 
 1. Enable Flow Logs on an existing Transit Gateway
