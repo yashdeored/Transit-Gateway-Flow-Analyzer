@@ -300,8 +300,4 @@ The QuickSight dashboard created by CloudFormation template leverages pre-define
 
 Architecture of the project: 
 
-Before Implementaion:
-![image](https://github.com/yashdeored/Transit-Gateway-Flow-Analyzer/assets/152061059/a607dde7-2b0e-440b-b5cb-de37a9d9e828)
-
-After Implementaion:
-![image](https://github.com/yashdeored/Transit-Gateway-Flow-Analyzer/assets/152061059/be955c12-0002-4ea7-9d24-e41b0cad2558)
+![Transit Gateway Flow Analyzer](https://github.com/yashdeored/Transit-Gateway-Flow-Analyzer/assets/152061059/53f39e2e-b4c6-4480-ae04-5c3088e7a61d)
